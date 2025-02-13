@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
+import History from './components/History';  
 import LandingPage from './components/LandingPage';
 import About from './components/About';
 import ContactForm from './components/ContactForm';
@@ -29,6 +30,14 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <Dashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/history" 
+                element={
+                  <ProtectedRoute>
+                    <History />
                   </ProtectedRoute>
                 } 
               />

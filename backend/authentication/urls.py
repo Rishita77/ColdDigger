@@ -9,4 +9,5 @@ urlpatterns = [
     path('upload-files/', views.upload_files, name='upload_files'),
     path('user-resume/', views.get_user_resume, name='get_user_resume'),
     path('get-position/', views.get_user_position, name='get-position'),
+    path('email-history/', views.get_email_history, name='email_history'),
 ]

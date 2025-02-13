@@ -5,8 +5,10 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import UserResume, CompanyContact
+from .models import UserResume, CompanyContact, EmailHistory
 from .utils import process_csv_file
+
+from django.contrib.auth.decorators import login_required
 
 @csrf_exempt
 def register_user(request):
@@ -149,3 +151,12 @@ def get_user_resume(request):
         })
     except UserResume.DoesNotExist:
         return JsonResponse({'error': 'No resume found'}, status=404)
+    
+@login_required
+def get_email_history(request):
+    if request.method == 'GET':
+        history = EmailHistory.objects.filter(user=request.user).values(
+            'id', 'recipient', 'subject', 'sent_date', 'status'
+        )
+        return JsonResponse({'history': list(history)})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)

@@ -24,3 +24,16 @@ class UserResume(models.Model):
 
     def __str__(self):
         return f"Resume of {self.user.email} for position '{self.position}'"
+    
+class EmailHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipient = models.EmailField()
+    subject = models.CharField(max_length=255)
+    sent_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=50)  # 'sent', 'failed', etc.
+    
+    class Meta:
+        ordering = ['-sent_date']  # Most recent first
+        
+    def __str__(self):
+        return f"{self.subject} - {self.recipient}"

@@ -330,3 +330,13 @@ input:focus, textarea:focus, select:focus {
   color: green;
   font-weight: bold;
 }
+
+code {
+  background-color: #131518;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  color: #ddd;
+}

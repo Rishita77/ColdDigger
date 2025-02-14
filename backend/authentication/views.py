@@ -91,18 +91,19 @@ def gmail_auth_callback(request):
 def send_email(request):
     try:
         data = json.loads(request.body)
-        contact_id = data.get('contactId')
-        
-        if not contact_id:
-            return JsonResponse({'error': 'Contact ID is required'}, status=400)
-
         send_to_all = data.get('sendToAll', False)
 
-        user_resume = UserResume.objects.get(user=request.user)
+        try:
+            user_resume = UserResume.objects.get(user=request.user)
+        except UserResume.DoesNotExist:
+            return JsonResponse({'error': 'Please upload your resume first'}, status=400)
 
         if send_to_all:
             # Send to all contacts
             contacts = CompanyContact.objects.all()
+            if not contacts:
+                return JsonResponse({'error': 'No contacts found'}, status=400)
+                
             success_count, failed_count, errors = send_bulk_emails(
                 user=request.user,
                 contacts=contacts,
@@ -114,9 +115,12 @@ def send_email(request):
                 'errors': errors if errors else None
             })
         else:
-            # Send to single contact
-            contact = CompanyContact.objects.get(id=contact_id)
+            # Single contact email sending
+            contact_id = data.get('contactId')
+            if not contact_id:
+                return JsonResponse({'error': 'Contact ID is required for single email'}, status=400)
 
+            contact = CompanyContact.objects.get(id=contact_id)
             recipient_data = {
                 'name': contact.name,
                 'title': contact.title,
@@ -129,12 +133,9 @@ def send_email(request):
                 'position': user_resume.position
             }
 
-            resume_highlights = extract_resume_highlights(
-                user_resume.resume.path)
-            email_body = generate_personalized_email(
-                recipient_data, sender_data, resume_highlights)
+            resume_highlights = extract_resume_highlights(user_resume.resume.path)
+            email_body = generate_personalized_email(recipient_data, sender_data, resume_highlights)
 
-            # Create and send email
             subject = f"Application for {sender_data['position']} position at {recipient_data['company']}"
             message = create_mail_message(
                 sender_email=request.user.email,
@@ -154,15 +155,17 @@ def send_email(request):
             })
 
             service = build('gmail', 'v1', credentials=credentials)
-            sent = service.users().messages().send(userId='me', body=message).execute()
+            service.users().messages().send(userId='me', body=message).execute()
 
             return JsonResponse({'message': 'Email sent successfully'})
 
-    
+    except UserResume.DoesNotExist:
+        return JsonResponse({'error': 'Please upload your resume first'}, status=400)
+    except GmailCredentials.DoesNotExist:
+        return JsonResponse({'error': 'Gmail authorization required'}, status=401)
     except Exception as e:
         print(f"Unexpected error: {str(e)}")  # Debug log
         return JsonResponse({'error': str(e)}, status=500)
-
 
 @csrf_exempt
 def register_user(request):

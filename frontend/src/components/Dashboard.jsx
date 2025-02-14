@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
-import '../App.css'; // Ensure this import is present to apply the CSS
 
 const toTitleCase = (str) => {
   return str.replace(/\w\S*/g, (txt) => {
@@ -15,7 +14,6 @@ const Dashboard = () => {
   const [error, setError] = useState("");
   const [position, setPosition] = useState("");
   const [contacts, setContacts] = useState([]);
-  const [selectedContact, setSelectedContact] = useState(null);
   const [emailStatus, setEmailStatus] = useState("");
   const [isGeneratingEmail, setIsGeneratingEmail] = useState(false);
 
@@ -45,9 +43,9 @@ const Dashboard = () => {
     fetchContacts();
   }, []);
 
-  const handleSendEmail = async () => {
-    if (!selectedContact) {
-      setError("Please select a contact first");
+  const handleSendToAll = async () => {
+    if (contacts.length === 0) {
+      setError("No contacts available to send emails to");
       return;
     }
 
@@ -65,15 +63,16 @@ const Dashboard = () => {
         return;
       }
 
-      // Send email
+      // Send email to all contacts
       const response = await axios.post('/api/send-email/', {
-        contactId: selectedContact
+        sendToAll: true
       });
 
-      setEmailStatus("Email sent successfully!");
-      setSelectedContact(null);
+      setEmailStatus(
+        `${response.data.message}`
+      );
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to send email');
+      setError(err.response?.data?.error || 'Failed to send emails');
     } finally {
       setIsGeneratingEmail(false);
     }
@@ -84,7 +83,6 @@ const Dashboard = () => {
     setError("");
     setUploadStatus("");
 
-    // Validate that either position or resume is provided
     const resumeFile = document.getElementById("resume-upload").files[0];
     if (!position && !resumeFile) {
       setError("Please provide either a position or upload a resume");
@@ -94,7 +92,6 @@ const Dashboard = () => {
     const formData = new FormData();
     const csvFile = document.getElementById("csv-upload").files[0];
 
-    // Optional CSV file
     if (csvFile) formData.append("csv_file", csvFile);
     if (resumeFile) formData.append("resume", resumeFile);
     if (position) formData.append("position", position);
@@ -113,6 +110,10 @@ const Dashboard = () => {
             : ""
         }`
       );
+      
+      // Refresh contacts list after successful upload
+      const contactsResponse = await axios.get('/api/contacts/');
+      setContacts(contactsResponse.data.contacts);
     } catch (err) {
       setError(err.response?.data?.error || "Upload failed");
     }
@@ -146,9 +147,9 @@ const Dashboard = () => {
             <input type="file" id="resume-upload" accept=".pdf,.doc,.docx" />
           </div>
           <div className="file-upload">
-            <label htmlFor="csv-upload">Upload Contact List (Optional):</label>
+            <label htmlFor="csv-upload">Upload Contact List: (Optional)</label>
             <input type="file" id="csv-upload" accept=".csv" />
-            <small>Format: name, email, title, company</small>
+            <small>Format: <code>name,email,title,company</code> written in first line of csv </small>
           </div>
         </div>
         <button type="submit" className="btn submit-btn">
@@ -157,38 +158,24 @@ const Dashboard = () => {
       </form>
 
       <div className="email-section mt-8">
-        <h4>Send Cold Email</h4>
+        <h4>Send Cold Emails</h4>
         
         {contacts.length > 0 ? (
-          <>
-            <div className="contact-select">
-              <label>Select Contact:</label>
-              <select
-                value={selectedContact || ''}
-                onChange={(e) => setSelectedContact(e.target.value)}
-              >
-                <option value="">Choose a contact...</option>
-                {contacts.map(contact => (
-                  <option key={contact.id} value={contact.id}>
-                    {contact.name} - {contact.company} ({contact.email})
-                  </option>
-                ))}
-              </select>
-            </div>
-
+          <div className="email-actions">
+            <p>Total Contacts: {contacts.length}</p>
             <button
-              onClick={handleSendEmail}
-              disabled={isGeneratingEmail || !selectedContact}
-              className="btn submit-btn"
+              onClick={handleSendToAll}
+              disabled={isGeneratingEmail}
+              className="btn submit-btn w-full mt-4"
             >
-              {isGeneratingEmail ? 'Generating & Sending Email...' : 'Generate & Send Email'}
+              {isGeneratingEmail ? 'Generating & Sending Emails...' : 'Send Personalized Emails to All Contacts'}
             </button>
-          </>
+          </div>
         ) : (
           <p>Upload a CSV file with contacts to start sending emails.</p>
         )}
 
-        {emailStatus && <p className="success-message">{emailStatus}</p>}
+        {emailStatus && <p className="success-message mt-4">{emailStatus}</p>}
       </div>
     </div>
   );

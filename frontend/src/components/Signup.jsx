@@ -70,7 +70,7 @@ const Signup = () => {
             <span className="input-hint">Must be at least 8 characters</span>
           </div>
 
-          <button type="submit" className="auth-button">
+          <button type="submit" className="cta-button">
             Create Account
           </button>
         </form>

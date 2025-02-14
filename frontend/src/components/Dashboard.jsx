@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
+import TestBanner2 from "./TestBanner2";
 
 const toTitleCase = (str) => {
   return str.replace(/\w\S*/g, (txt) => {
@@ -122,7 +123,7 @@ const Dashboard = () => {
   return (
     <div className="container">
       <h3>Dashboard</h3>
-      <h2>
+      <h2 style={{ marginBottom: "20px" }}>
         Welcome, <span>{user?.name ? toTitleCase(user.name) : ""}</span>!
       </h2>
 
@@ -162,7 +163,8 @@ const Dashboard = () => {
         
         {contacts.length > 0 ? (
           <div className="email-actions">
-            <p>Total Contacts: {contacts.length}</p>
+            <p style={{marginBottom:"10px"}}>Total Contacts: {contacts.length}</p>
+            <TestBanner2 />
             <button
               onClick={handleSendToAll}
               disabled={isGeneratingEmail}

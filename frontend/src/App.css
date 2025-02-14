@@ -576,29 +576,23 @@ code {
 }
 
 .navbar-brand {
-  text-decoration: none;
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.navbar-brand h2 {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #4adeff 0%, #5aecff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 20px rgba(74, 222, 255, 0.3);
+.brand-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.navbar-brand::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(74, 222, 255, 0.5), transparent);
+.navbar-logo {
+  height: 32px;  /* Adjust size as needed */
+  width: auto;
+}
+
+.brand-name {
+  margin: 0;
 }
 
 .navbar-links {
@@ -771,5 +765,4 @@ code {
     text-align: center;
     margin-top: 0.5rem;
   }
-}
 }

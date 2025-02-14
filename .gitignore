@@ -7,3 +7,5 @@ dist/
 .DS_Store
 media/
 .csv
+client_secrets.json
+test.csv

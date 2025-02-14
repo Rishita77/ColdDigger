@@ -48,3 +48,13 @@ class EmailHistory(models.Model):
         
     def __str__(self):
         return f"{self.subject} - {self.recipient}"
+    
+class GmailCredentials(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    refresh_token = models.CharField(max_length=255)
+    access_token = models.CharField(max_length=255, null=True)
+    token_expiry = models.DateTimeField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Gmail Credentials for {self.user.email}"

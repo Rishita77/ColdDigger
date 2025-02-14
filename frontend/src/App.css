@@ -6,9 +6,17 @@
 }
 
 @keyframes gradientBG {
-  0% { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
 }
 
 /* animation */
@@ -169,7 +177,9 @@ form {
   margin: 0 auto;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   padding: 0.8rem;
   background: rgba(31, 40, 51, 0.8);
   border: 1px solid rgba(102, 252, 241, 0.2);
@@ -179,7 +189,9 @@ input, textarea, select {
   transition: all 0.3s ease;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   border-color: #66fcf1;
   box-shadow: 0 0 0 2px rgba(102, 252, 241, 0.1);
   outline: none;
@@ -218,7 +230,8 @@ input:focus, textarea:focus, select:focus {
   gap: 2rem;
 }
 
-.upload-section, .position-section {
+.upload-section,
+.position-section {
   background: linear-gradient(145deg, #1f2833, #2a3440);
   padding: 1.5rem;
   border-radius: 8px;
@@ -489,6 +502,7 @@ code {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -551,7 +565,7 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 
+  box-shadow:
     0 10px 30px -10px rgba(0, 0, 0, 0.5),
     0 0 20px rgba(74, 222, 255, 0.1),
     inset 0 0 15px rgba(255, 255, 255, 0.05);
@@ -559,16 +573,19 @@ code {
 }
 
 @keyframes floatingEffect {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
-    box-shadow: 
+    box-shadow:
       0 10px 30px -10px rgba(0, 0, 0, 0.5),
       0 0 20px rgba(74, 222, 255, 0.1),
       inset 0 0 15px rgba(255, 255, 255, 0.05);
   }
+
   50% {
     transform: translateY(-5px);
-    box-shadow: 
+    box-shadow:
       0 20px 40px -15px rgba(0, 0, 0, 0.4),
       0 0 25px rgba(74, 222, 255, 0.15),
       inset 0 0 20px rgba(255, 255, 255, 0.08);
@@ -587,7 +604,8 @@ code {
 }
 
 .navbar-logo {
-  height: 32px;  /* Adjust size as needed */
+  height: 32px;
+  /* Adjust size as needed */
   width: auto;
 }
 
@@ -743,6 +761,7 @@ code {
       opacity: 0;
       transform: translateY(-10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -769,18 +788,19 @@ code {
 
 .developer-img {
   width: 120px;
-  height: 120px; 
-  object-fit: cover; 
-  border-radius: 50%; 
-  border: 2px solid #ddd; 
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); 
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .developers-container {
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: wrap; /* Ensures responsiveness */
+  flex-wrap: wrap;
+  /* Ensures responsiveness */
 }
 
 .developer-card {
@@ -791,6 +811,7 @@ code {
   background: #050505;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
+
 .developer-card {
   text-align: center;
   max-width: 250px;
@@ -810,7 +831,8 @@ code {
   border-radius: 50%;
   border: 2px solid #0b0b0b;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px; /* Ensures spacing between image and bio */
+  margin-bottom: 10px;
+  /* Ensures spacing between image and bio */
 }
 
 .developer-card p {
@@ -818,8 +840,10 @@ code {
   font-size: 14px;
   color: #010000;
 }
+
 .about-section {
-  margin-bottom: 40px; /* Adjust the space between sections */
+  margin-bottom: 40px;
+  /* Adjust the space between sections */
 }
 
 .developers-container {
@@ -837,29 +861,34 @@ code {
   background: #f9f9f9;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
+
 .about-section h2 {
+  text-align: center;
   text-decoration: underline;
   text-underline-offset: 5px;
-  text-decoration-thickness: 2px; 
-}
-.about-section h2 {
-  text-decoration: underline;
-  text-underline-offset: 5px; 
-  text-decoration-thickness: 2px; 
-  margin-bottom: 15px; 
+  text-decoration-thickness: 2px;
+  margin-bottom: 15px;
 }
 
 .about-section p,
 .about-section .developers-container {
-  margin-top: 10px; 
+  margin-top: 10px;
 }
+
+.about-section p {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
 .developer-card h3 {
-  color: #000; /* Change to a darker color */
+  color: #000;
+  /* Change to a darker color */
   font-size: 16px;
   font-weight: bold;
 }
 
 .developer-card p {
-  color: #0f0101; /* Adjusted for better visibility */
+  color: #0f0101;
+  /* Adjusted for better visibility */
   font-size: 14px;
 }

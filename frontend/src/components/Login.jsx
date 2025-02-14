@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import TestBanner from "./TestBanner"; // Import the TestBanner component
+import TestBanner from "./TestBanner";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,34 +23,53 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <h2 id="login-heading">Login</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <TestBanner /> {/* Add the TestBanner component */}
-        <input
-          type="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-          required
-        />
-        <button className="btn" type="submit">
-          Login
-        </button>
-      </form>
-      <p>
-        <Link to="/signup">New user? Signup</Link>
-      </p>
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h2>Welcome Back</h2>
+          <p className="auth-subtitle">Sign in to continue to your account</p>
+        </div>
+        
+        {error && <div className="error-alert">{error}</div>}
+        
+        <form onSubmit={handleSubmit} className="auth-form">
+          <TestBanner />
+          
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              required
+              className="auth-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              required
+              className="auth-input"
+            />
+          </div>
+
+          <button type="submit" className="auth-button">
+            Sign In
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <p>
+            Don't have an account? <Link to="/signup" className="auth-link">Sign up</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

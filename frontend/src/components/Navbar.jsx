@@ -15,7 +15,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-brand">
         <div className="brand-content">
-          <img src="/favicon.png" alt="ColdDigger Logo" className="navbar-logo" />
+          <img src="./favicon.png" alt="ColdDigger Logo" className="navbar-logo" />
           <h2 className="brand-name">ColdDigger</h2>
         </div>
       </div>

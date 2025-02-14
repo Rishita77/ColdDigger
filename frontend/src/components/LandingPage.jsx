@@ -16,18 +16,24 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="jumbotron">
-      <div className="container landing-page">
-        <h1>Welcome to ColdDigger</h1>
-        <div className="hero-content">
-          <h2>Streamline Your Job Search</h2>
-          <p>
-            Automate your cold emailing process and increase your chances of
-            landing your dream job!
+    <div className="landing-container">
+      <div className="content-wrapper">
+        <div className="hero-section">
+          <h1>
+            The New Standard For
+            <span className="gradient-text"> Cold Outreach</span>
+          </h1>
+          <p className="hero-description">
+            Save countless hours in your job search and increase your success rate with ColdDigger,
+            the all-in-one platform designed specifically for automated job applications.
           </p>
-          <button className="btn" onClick={handleButtonClick}>
-            {user ? "Go to Dashboard" : "Start Application"}
+          <button className="cta-button" onClick={handleButtonClick}>
+            {user ? "Go to Dashboard" : "Get Started →"}
           </button>
+        </div>
+        
+        <div className="illustration-section">
+          {/* You can add an illustration or 3D model here */}
         </div>
       </div>
     </div>

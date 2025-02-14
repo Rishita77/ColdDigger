@@ -340,3 +340,7 @@ code {
   font-size: 0.9em;
   color: #ddd;
 }
+
+#login-heading {
+  margin-bottom: 20px;
+}

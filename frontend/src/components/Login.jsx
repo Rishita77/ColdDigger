@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import TestBanner from "./TestBanner"; // Import the TestBanner component
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,9 +24,10 @@ const Login = () => {
 
   return (
     <div className="container">
-      <h2>Login</h2>
+      <h2 id="login-heading">Login</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
+        <TestBanner /> {/* Add the TestBanner component */}
         <input
           type="email"
           placeholder="Email"

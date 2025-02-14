@@ -1,33 +1,66 @@
+
+import pragya from "../assets/pragya.jpg";
+import Harsheen from "../assets/Harsheen.jpg";
+import Rishita from "../assets/Rishita.jpg";
+
 const About = () => {
+  const developers = [
+    {
+      name: "Pragya",
+      image: pragya, // Use the imported image variable
+      bio: "Frontend Developer | Passionate about UI/UX and React.",
+      linkedin: "https://www.linkedin.com/in/pragya-chaturvedi-95a179251/",
+    },
+    {
+      name: "Harsheen Kaur Kohli",
+      image: Harsheen,
+      bio: "Backend Enthusiast | Django & Database Expert.",
+      linkedin: "https://www.linkedin.com/in/harsheen-kaur-kohli/",
+    },
+    {
+      name: "Rishita Makde",
+      image: Rishita,
+      bio: "AI Specialist | Passionate about building intelligent systems",
+      linkedin: "https://www.linkedin.com/in/rishita-makde-1216a834a/",
+    },
+  ];
+  
+
   return (
     <div className="container about-box">
-      <h2>About Us</h2>
-      <p>
-        Welcome to ColdDigger! We are dedicated to empowering students with a
-        seamless and efficient cold-emailing solution. Our platform is designed
-        to save time and effort by allowing students to send personalized emails
-        to multiple institutions at once, based on their academic interests and
-        career goals.
-      </p>
-      <p>
-        Our mission is to bridge the gap between students and educational
-        institutions, providing a streamlined process for communication and
-        opportunities. Whether you're looking to apply for internships,
-        scholarships, or research positions, ColdDigger is here to help you make
-        meaningful connections.
-      </p>
-      <p>
-        We believe in the power of personalized communication. Our platform
-        enables you to craft tailored messages that highlight your unique
-        strengths and aspirations, ensuring that your emails stand out. With
-        ColdDigger, you can focus on what matters most—your education and career
-        growth.
-      </p>
-      <p>
-        Join us on this journey to simplify and enhance your cold-emailing
-        experience. Together, we can open doors to new opportunities and help
-        you achieve your academic and professional dreams.
-      </p>
+      {/* About Website Section */}
+      <section className="about-section">
+        <h2>About ColdDigger</h2>
+        <p>
+          Welcome to ColdDigger! We are dedicated to empowering students with a
+          seamless and efficient cold-emailing solution. Our platform saves time by
+          allowing students to send personalized emails to multiple institutions
+          based on their academic interests and career goals.
+        </p>
+        <p>
+          Our mission is to bridge the gap between students and educational
+          institutions, streamlining communication and opportunities. Whether
+          you're looking for internships, scholarships, or research positions,
+          ColdDigger helps you make meaningful connections.
+        </p>
+      </section>
+
+      {/* About Developers Section */}
+      <section className="about-section">
+        <h2>About the Developers</h2>
+        <div className="developers-container">
+          {developers.map((dev, index) => (
+            <div className="developer-card" key={index}>
+              <img src={dev.image} alt={dev.name} className="developer-img" />
+              <h3>{dev.name}</h3>
+              <p>{dev.bio}</p>
+              <a href={dev.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn Profile
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

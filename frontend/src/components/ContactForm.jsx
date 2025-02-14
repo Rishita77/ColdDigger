@@ -6,13 +6,24 @@ const ContactForm = () => {
     email: "",
     message: "",
   });
+
   const [submitStatus, setSubmitStatus] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    setSubmitStatus("Message sent successfully!");
-    setFormData({ name: "", email: "", message: "" });
+
+    const response = await fetch("https://formspree.io/f/xkgoqnod", { // ✅ Your Formspree endpoint
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      setSubmitStatus("Message sent successfully! ✅");
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      setSubmitStatus("Failed to send message. ❌ Please try again.");
+    }
   };
 
   return (
@@ -22,6 +33,7 @@ const ContactForm = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          name="name"
           placeholder="Your Name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -29,12 +41,14 @@ const ContactForm = () => {
         />
         <input
           type="email"
+          name="email"
           placeholder="Your Email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           required
         />
         <textarea
+          name="message"
           placeholder="Your Message"
           value={formData.message}
           onChange={(e) =>

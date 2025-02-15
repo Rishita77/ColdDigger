@@ -169,7 +169,7 @@ def get_oauth_flow():
     return Flow.from_client_secrets_file(
         'client_secrets.json',
         scopes=['https://www.googleapis.com/auth/gmail.send'],
-        redirect_uri='http://localhost:8000/api/gmail-auth'
+        redirect_uri=f'http://{settings.BACKEND_URL}/api/gmail-auth'
     )
 
 def generate_email(recipient_name, company, position, sender_name):

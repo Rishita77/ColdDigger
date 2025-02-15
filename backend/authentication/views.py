@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 import json
+from django.conf import settings
 
 from .models import UserResume, CompanyContact, EmailHistory, ApplicationHistory, GmailCredentials
 from .utils import process_csv_file
@@ -79,7 +80,7 @@ def gmail_auth_callback(request):
             }
         )
 
-        return redirect('http://localhost:5173/dashboard')
+        return redirect(f'{settings.FRONTEND_URL}/dashboard')
 
     except Exception as e:
         return JsonResponse({

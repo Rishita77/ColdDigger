@@ -6,14 +6,14 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.VITE_API_URL || 'http://127.0.0.1:8080',
+        target: process.env.VITE_API_URL || 'http://127.0.0.1:8000',
         changeOrigin: true,
         secure: false,
       },
     },
   },
   preview: {
-    port: parseInt(process.env.PORT) || 4173, // Use Railway's assigned port
+    port: parseInt(process.env.PORT) || 4173,
+    host: true, // Required for Docker
   },
 });
-  

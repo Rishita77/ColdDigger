@@ -3,19 +3,19 @@ FROM node:19-alpine
 WORKDIR /app
 
 # Copy package files
-COPY frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy frontend code
-COPY frontend/ .
+COPY . .
 
 # Build the app
 RUN npm run build
 
-# Expose the port the app runs on
+# Expose the port
 EXPOSE $PORT
 
 # Command to run the app
-CMD npm run preview -- --host --port $PORT
+CMD ["npm", "run", "preview"]

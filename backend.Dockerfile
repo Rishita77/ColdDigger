@@ -23,3 +23,20 @@ EXPOSE $PORT
 
 # Command to run on container start
 CMD python manage.py migrate && gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost:$PORT/health/ || exit 1
+
+EXPOSE $PORT
+
+# Add startup timeout
+CMD timeout 60 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$HOST/$PORT; do sleep 1; done' && \
+    python manage.py migrate && \
+    gunicorn backend.wsgi:application \
+    --bind 0.0.0.0:$PORT \
+    --workers 2 \
+    --threads 2 \
+    --timeout 60 \
+    --keep-alive 5 \
+    --max-requests 1000 \
+    --max-requests-jitter 50

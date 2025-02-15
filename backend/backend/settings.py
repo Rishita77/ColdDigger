@@ -101,12 +101,29 @@ load_dotenv()
 #     }
 # }
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv('DATABASE_URL'),
+#         conn_max_age=600,
+#         conn_health_checks=True,
+#     )
+# }
+
 DATABASES = {
     'default': dj_database_url.config(
         default=os.getenv('DATABASE_URL'),
         conn_max_age=600,
         conn_health_checks=True,
+        ssl_require=True  # Add this for Railway
     )
+}
+
+# Add connection pooling options using DATABASES['default']['OPTIONS']
+DATABASES['default']['OPTIONS'] = {
+    'keepalives': 1,
+    'keepalives_idle': 130,
+    'keepalives_interval': 10,
+    'keepalives_count': 10,
 }
 
 # Password validation

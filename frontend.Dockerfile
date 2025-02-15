@@ -14,8 +14,10 @@ COPY . .
 # Build the app
 RUN npm run build
 
-# Expose the port
+# Expose the correct port
+ARG PORT=5173
+ENV PORT=$PORT
 EXPOSE $PORT
 
-# Command to run the app
-CMD ["npm", "run", "preview"]
+# Start Vite in preview mode with explicit port
+CMD ["sh", "-c", "npm run preview -- --host 0.0.0.0 --port $PORT"]

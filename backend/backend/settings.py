@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 # Application definition
 
@@ -79,6 +79,8 @@ TEMPLATES = [
         },
     },
 ]
+
+DEBUG=False
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 

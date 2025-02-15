@@ -1,23 +1,13 @@
-// In your React app where you configure axios
-
 import axios from 'axios';
 
-// Configure axios defaults
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
-// Update your API calls to include credentials
-const sendEmail = async (contactId) => {
-    try {
-        const response = await axios.post('/api/send-email/', {
-            contactId: contactId
-        }, {
-            withCredentials: true
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error sending email:', error);
-        throw error;
-    }
-};
+const axiosInstance = axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+});
+
+axiosInstance.defaults.xsrfCookieName = 'csrftoken';
+axiosInstance.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+export default axiosInstance;

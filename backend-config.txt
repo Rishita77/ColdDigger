@@ -1,0 +1,17 @@
+================================================================================
+                                    backend                                     
+================================================================================
+
+-------------------------------------------------------------------------------
+Environment: Development
+-------------------------------------------------------------------------------
+ServiceURL      : https://dc00e505-e62f-4ad2-ac2e-df7a68893d24-dev.e1-us-east-azure.choreoapis.dev/colddigger/backend/v1
+ChoreoAPIKey    : chk_eyJjb25uZWN0aW9uLWlkIjoiMDFlZmViMWUtMTQxMS0xNTBlLWE2MmYtNmI2M2VhMGMwNTU2In0=489xVA
+
+-------------------------------------------------------------------------------
+Environment: Production
+-------------------------------------------------------------------------------
+ServiceURL      : 
+ChoreoAPIKey    : chk_eyJjb25uZWN0aW9uLWlkIjoiMDFlZmViMWUtMTQxMS0xNTBlLWE2MmYtNmI2M2VhMGMwNTU2In0=489xVA
+
+================================================================================

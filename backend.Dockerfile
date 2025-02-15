@@ -13,13 +13,13 @@ RUN pip install -r requirements.txt
 COPY backend/ .
 
 # Verify manage.py exists
-RUN ls -la manage.py
+RUN ls -la backend/manage.py
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+RUN python backend/manage.py collectstatic --noinput
 
 # Expose port
 EXPOSE $PORT
 
 # Command to run on container start
-CMD python manage.py migrate && gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+CMD python backend/manage.py migrate && gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
